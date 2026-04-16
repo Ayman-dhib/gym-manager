@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  PENDING
+}
+
+enum PaymentStatus {
+  PAID
+  PENDING
+  FAILED
+}
+
+model User {
+  id             String         @id @default(uuid())
+  name           String
+  email          String         @unique
+  password       String
+  role           Role           @default(MEMBER)
+  membership     Membership?
+  payments       Payment[]
+  isDeleted      Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  attendances    Attendance[]
+}
+
+model Membership {
+  id             String             @id @default(uuid())
+  userId         String             @unique
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planType       String             // "Monthly", "Yearly", etc.
+  startDate      DateTime
+  endDate        DateTime
+  status         SubscriptionStatus @default(PENDING)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount         Float
+  paymentDate    DateTime      @default(now())
+  status         PaymentStatus @default(PAID)
+  createdAt      DateTime      @default(now())
+}
+
+model Attendance {
+  id             String    @id @default(uuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  checkIn        DateTime  @default(now())
+}
+
+model Announcement {
+  id             String    @id @default(uuid())
+  title          String
+  content        String
+  priority       String    @default("NORMAL") // e.g. NORMAL, HIGH
+  createdAt      DateTime  @default(now())
+}
+
+model ActivityLog {
+  id             String    @id @default(uuid())
+  action         String
+  details        String
+  createdAt      DateTime  @default(now())
+}

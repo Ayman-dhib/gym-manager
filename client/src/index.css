@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f6f8; /* Soft SaaS background */
+  color: #2b3445; /* Darker clean font */
+}
+
+/* Modern Rounded Aesthetics */
+.rounded-lg { border-radius: 12px !important; }
+.rounded-xl { border-radius: 16px !important; }
+
+/* Elegant Card Shadows and interactions */
+.card {
+  border-radius: 12px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease-in-out;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Button Upgrades */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease-in-out;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.btn:active { transform: translateY(0); }
+.btn:disabled { transform: none; box-shadow: none; opacity: 0.6; }
+
+/* Table Improvements */
+.table {
+  --bs-table-bg: transparent;
+  vertical-align: middle;
+}
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  background-color: #f8f9fa !important;
+  color: #6b7280;
+  border-bottom: 2px solid #e5e7eb;
+}
+tbody tr { transition: background-color 0.2s ease; }
+tbody tr:hover { background-color: #f9fafb !important; }
+
+/* Form Fields */
+.form-control, .form-select {
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #e1e4e8;
+  transition: border-color 0.2s ease, box-shadow 0.2s;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Navigation Overrides */
+.navbar { padding: 1rem 0; }
+.nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.2s; }
+.nav-link.active { color: #0d6efd !important; font-weight: 600; }
