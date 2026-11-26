@@ -1,60 +1,70 @@
-# 🏋️ GymManager Pro - Management System
+<div align="center">
 
-A polished, full-stack Gym Management Web Application suitable for production, built with **React**, **Vite**, **Bootstrap 5**, **Node.js (Express)**, and **PostgreSQL** using **Prisma 7**.
+# 🏋️ GymManager Pro
 
-## 🚀 Advanced Features Implemented
-*   **Authentication Hardened**: JWT-based login and registration with automated frontend logout upon 401 Expiry via Axios Interceptors.
-*   **Members Management**: Complete CRUD operations wrapped in React Bootstrap Modals with responsive Spinners and Toasts.
-*   **Dynamic Search & Filtering**: Client-side reactive search bar to instantly query through gym members by name or email.
-*   **Pagination Algorithm**: Segmented data rendering strictly displaying 5 entries per page for heavy lists (Members and Payments).
-*   **Automated Expiration Check**: Synchronously checks and enforces expiration status updates in the database when pulling Dashboard statistics.
-*   **Dashboard Visuals**: Integrated `Chart.js` mapping real-time live active vs active distributions against total revenue visually.
-*   **Email Automation Engine**: Built-in Nodemailer service for automatic robust HTML Welcome and Payment Confirmation emails directly parsing standard JSON outputs.
+**Full-stack gym management app: members, payments, subscriptions and automated emails**
 
-## 🧱 Technology Stack
-*   **Frontend**: React, Vite, React Router, Bootstrap 5, Axios, React-Toastify, Chart.js.
-*   **Backend**: Node.js, Express, Prisma ORM, JSON Web Tokens, bcrypt, Nodemailer.
-*   **Database**: PostgreSQL.
+![React](https://img.shields.io/badge/React-20232a?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
----
+</div>
 
-## ⚙️ Step-by-Step Setup Instructions
+## Overview
 
-### 1. Connecting the Database (PostgreSQL)
-Run the provided Docker configuration from the root directory to instantly spool a containerized database:
+GymManager Pro helps a gym track its members, payments and subscriptions. It has JWT authentication, a dashboard with revenue charts, automatic subscription expiry, and welcome and payment emails sent automatically.
+
+## Features
+
+- **JWT authentication**: login and registration, automatic logout when the token expires (Axios interceptors)
+- **Members**: full CRUD in modals, with instant search by name or email
+- **Payments** with pagination
+- **Automatic expiry**: subscriptions are checked and updated when the dashboard loads
+- **Dashboard**: Chart.js charts of active members and revenue
+- **Email automation**: HTML welcome and payment confirmation emails (Nodemailer)
+
+## Tech stack
+
+| Layer | Technologies |
+|---|---|
+| Front-end | React, Vite, React Router, Bootstrap 5, Axios, React-Toastify, Chart.js |
+| Back-end | Node.js, Express, Prisma ORM, JWT, bcrypt, Nodemailer |
+| Database | PostgreSQL (Docker) |
+
+## Getting started
+
 ```bash
+# Database
 docker-compose up -d
-```
-This generates a database `gym_db` on port `5432` with user `gym_user` and password `gym_password`.
 
-### 2. Configure Environment Variables
-Inside `/server`, verify the `.env` file reflects:
-```env
-PORT=5000
-DATABASE_URL="postgresql://gym_user:gym_password@localhost:5432/gym_db?schema=public"
-JWT_SECRET="super_secret_gym_key_change_me_in_prod"
-SMTP_HOST="smtp.ethereal.email"
-SMTP_PORT=587
-SMTP_USER="ethereal_user"
-SMTP_PASS="ethereal_pass"
-```
-
-### 3. Initialize Backend
-Open your terminal and navigate to the backend:
-```bash
+# Back-end (create server/.env first: PORT, DATABASE_URL, JWT_SECRET, SMTP_*)
 cd server
 npm install
 npx prisma db push
 npm run dev
-```
 
-### 4. Initialize Frontend
-Open a new terminal tab and navigate to the frontend:
-```bash
-cd client
+# Front-end
+cd ../client
 npm install
-npm run dev
+npm run dev     # http://localhost:5173
 ```
 
-### 5. Access the Application
-Navigate your browser to `http://localhost:5173`. Create an account via the clean toggle interface, login, and explore! You can observe email traces dropping sequentially into your backend Node.js terminal exactly imitating an active SMTP gateway.
+## Project structure
+
+```
+client/src/
+  pages/        dashboard, members, payments, login
+  components/   modals, tables, charts
+  services/     API client
+server/
+  prisma/       schema
+  src/          routes, controllers, email service
+docker-compose.yml   PostgreSQL
+```
+
+---
+
+Built by [Ayman Dhib](https://www.linkedin.com/in/ayman-dhib/)
